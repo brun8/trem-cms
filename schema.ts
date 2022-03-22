@@ -90,7 +90,7 @@ export const lists: Lists = {
       }),
     },
     ui: {
-      isHidden: true,
+      isHidden: false,
     }
   }),
 
