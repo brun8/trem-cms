@@ -43,6 +43,32 @@ export const lists: Lists = {
   }),
 
   List: list({
+    hooks: {
+      resolveInput: async ({operation, resolvedData, context}) => {
+        if (operation === 'create') {
+          const listType = resolvedData.type?.connect?.id;
+          const ftypes = await context.db.FileType.findMany({
+            where: {
+              listType: {
+                some: {
+                  id: { equals: listType }
+                }
+              }
+            }
+          });
+
+          const uploads = ftypes.map(type => (
+            {
+              name: type.name,
+              fileTypeId: type.id,
+            }
+          ));
+
+          resolvedData.uploads = {create: uploads};
+          return resolvedData;
+        }
+      },
+    },
     fields: {
       title: text(),
       client: relationship({
@@ -64,6 +90,7 @@ export const lists: Lists = {
   // assossiados ao tipo da lista
   FileUpload: list({
     fields: {
+      name: text(),
       file: file(),
       fileType: relationship({
         ref: 'FileType.files'

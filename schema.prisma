@@ -38,6 +38,7 @@ model List {
 
 model FileUpload {
   id            String    @id @default(cuid())
+  name          String    @default("")
   file_filesize Int?
   file_mode     String?
   file_filename String?

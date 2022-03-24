@@ -251,6 +251,7 @@ input FileUploadRelateToManyForCreateInput {
 
 type FileUpload {
   id: ID!
+  name: String
   file: FileFieldOutput
   fileType: FileType
   list: List
@@ -286,15 +287,18 @@ input FileUploadWhereInput {
   OR: [FileUploadWhereInput!]
   NOT: [FileUploadWhereInput!]
   id: IDFilter
+  name: StringFilter
   fileType: FileTypeWhereInput
   list: ListWhereInput
 }
 
 input FileUploadOrderByInput {
   id: OrderDirection
+  name: OrderDirection
 }
 
 input FileUploadUpdateInput {
+  name: String
   file: FileFieldInput
   fileType: FileTypeRelateToOneForUpdateInput
   list: ListRelateToOneForUpdateInput
@@ -328,6 +332,7 @@ input FileUploadUpdateArgs {
 }
 
 input FileUploadCreateInput {
+  name: String
   file: FileFieldInput
   fileType: FileTypeRelateToOneForCreateInput
   list: ListRelateToOneForCreateInput
